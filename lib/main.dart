@@ -29,6 +29,8 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cm = Provider.of<CmKK>(context);
+    final network = Provider.of<EnPoint>(context);
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -74,9 +76,18 @@ class MyHomePage extends StatelessWidget {
                       ),
                       SizedBox(width: 20),
                       CupertinoButton(
-                          color: Colors.blueAccent,
-                          child: Text('Show'),
-                          onPressed: () => print('f')),
+                        color: Colors.blueAccent,
+                        child: Text('Show'),
+                        onPressed: () async {
+                          try {
+                            await network.getCl(cm.file);
+                          } catch (e) {
+                            print(e);
+                          }
+
+                          cm.removeimage();
+                        },
+                      ),
                     ],
                   ),
                 )

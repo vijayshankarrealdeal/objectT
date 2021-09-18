@@ -5,14 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 
 class EnPoint extends ChangeNotifier {
-  final url = "http://10.0.2.2/upload";
+  final url = "http://10.0.2.2:4000/upload";
   String me = '';
 
   Future<void> getCl(File file) async {
     final request = http.MultipartRequest("POST", Uri.parse(url));
     final headers = {"Content-type": "multipart/form-data"};
     request.files.add(http.MultipartFile(
-        'img', file.readAsBytes().asStream(), file.lengthSync(),
+        'image', file.readAsBytes().asStream(), file.lengthSync(),
         filename: file.path.split("/").last));
     request.headers.addAll(headers);
 

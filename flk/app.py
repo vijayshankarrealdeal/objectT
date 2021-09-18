@@ -5,9 +5,9 @@ app = Flask(__name__)
 @app.route('/upload',methods = ['POST'])
 def upload():
     if(request.method == 'POST'):
-        imageFile = request.files['img']
-        filename = werkzeug.utils.secure_filename(imageFile.filename)
-        imageFile.save('/uploadFolder/'+filename)
+        imagefile = request.files['image']
+        filename = werkzeug.utils.secure_filename(imagefile.filename)
+        imagefile.save('uploadedimages/'+filename)
         return jsonify({"message":"Img Uplo one"})
 
 
