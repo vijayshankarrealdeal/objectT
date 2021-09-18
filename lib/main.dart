@@ -81,11 +81,11 @@ class MyHomePage extends StatelessWidget {
                         onPressed: () async {
                           try {
                             await network.getCl(cm.file);
+                            cm.removeimage();
+                            await network.getData();
                           } catch (e) {
                             print(e);
                           }
-
-                          cm.removeimage();
                         },
                       ),
                     ],

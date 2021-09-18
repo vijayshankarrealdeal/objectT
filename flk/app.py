@@ -2,6 +2,13 @@ from flask import Flask,jsonify,request
 import werkzeug
 app = Flask(__name__)
 
+@app.route("/api",methods=["GET"])
+def function():
+    if(request.method == 'GET'):
+        d = {}
+        text = "Hello Boyyy"
+        d["query"] = text
+        return jsonify(d)
 @app.route('/upload',methods = ['POST'])
 def upload():
     if(request.method == 'POST'):
