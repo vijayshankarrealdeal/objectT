@@ -1,8 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:pipecount/cmr/cam.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CmKK(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,59 +21,38 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final cm = Provider.of<CmKK>(context);
     return Scaffold(
-      appBar: AppBar(title: Text("Test"),),
-      body: Center(child: RaisedButton(onPressed: (){
-        _optionsDialogBox();
-      }, child: Text("Button"),),),
-    );
-  }
-
-  openCamera() async {
-    var picture = await ImagePicker.platform.pickImage(
-      source: ImageSource.camera,
-    );
-  }
-
-  openGallery() async {
-    var gallery = await ImagePicker.platform.pickImage(
-      source: ImageSource.gallery,
-    );
-  }
-
-  _optionsDialogBox() {
-    return showDialog(context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: new SingleChildScrollView(
-              child: new ListBody(
-                children: <Widget>[
-                  GestureDetector(
-                    child: new Text('Take a picture'),
-                    onTap: openCamera,
+      appBar: AppBar(
+        title: Text("Test"),
+      ),
+      body: Container(
+        height: 200,
+        child: cm.lo
+            ? Center(
+                child: CupertinoButton(
+                  color: Colors.blueAccent,
+                  child: Text('Hello'),
+                  onPressed: () => cm.optionsDialogBox(context),
+                ),
+              )
+            : Stack(
+                children: [
+                  Container(
+                    height: 100,
+                    child: Image.file(cm.file),
+                    color: Colors.blue.withOpacity(0.2),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                  ),
-                  GestureDetector(
-                    child: new Text('Select from gallery'),
-                    onTap: openGallery,
+                  Container(
+                    height: 100,
+                    child: Image.file(cm.file),
                   ),
                 ],
               ),
-            ),
-          );
-        });
+      ),
+    );
   }
 }

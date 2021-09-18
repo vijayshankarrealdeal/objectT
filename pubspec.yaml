@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   camera:
   image_picker:
+  provider: ^6.0.0
   permission_handler:
   path_provider:
   path:
