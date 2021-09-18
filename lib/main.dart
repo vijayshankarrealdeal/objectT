@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pipecount/cmr/cam.dart';
+import 'package:pipecount/ervice/pi.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CmKK(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => EnPoint()),
+        ChangeNotifierProvider(create: (context) => CmKK()),
+      ],
       child: MyApp(),
     ),
   );
@@ -31,7 +35,6 @@ class MyHomePage extends StatelessWidget {
         title: Text("Test"),
       ),
       body: Column(
-     
         children: [
           Container(width: double.infinity),
           cm.file == null
@@ -43,8 +46,8 @@ class MyHomePage extends StatelessWidget {
                   ),
                 )
               : Container(
-                height: 500,
-                child: Stack(
+                  height: 500,
+                  child: Stack(
                     alignment: Alignment.center,
                     children: [
                       Container(
@@ -52,16 +55,16 @@ class MyHomePage extends StatelessWidget {
                         child: Image.file(cm.file),
                       ),
                       Container(
-                       width: 500,
+                        width: 500,
                         color: Colors.white.withOpacity(0.3),
                       ),
                     ],
                   ),
-              ),
+                ),
           cm.file != null
               ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       CupertinoButton(
@@ -76,7 +79,7 @@ class MyHomePage extends StatelessWidget {
                           onPressed: () => print('f')),
                     ],
                   ),
-              )
+                )
               : SizedBox()
         ],
       ),
