@@ -5,13 +5,11 @@ import 'package:image_picker/image_picker.dart';
 
 class CmKK extends ChangeNotifier {
   File file;
-  bool lo = true;
 
   Future<void> _getIm(ImageSource picker) async {
     final ImagePicker _picker = ImagePicker();
     final XFile image = await _picker.pickImage(source: picker);
     file = File(image.path);
-    lo = false;
     notifyListeners();
   }
 
