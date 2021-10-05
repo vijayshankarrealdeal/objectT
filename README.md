@@ -7,7 +7,7 @@ Companies that manufacture, process, and sell pipes of different material face p
 We trained a mask-rcnn model and built a flutter application which can do this task very easily, thus slightly reducing the costs incured by the companies for these tasks.
 
 # 2nd Prize Winning
-![X](r.png?raw=true "result")
+![Alt text](r.PNG?raw=true "result")
 
 
 ### Sample Screenshots
